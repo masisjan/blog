@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Scopes\FilterScope;
+use App\Scopes\SearchScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model

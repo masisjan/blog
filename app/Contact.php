@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Scopes\FilterScope;
+use App\Scopes\SearchScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
@@ -11,6 +13,18 @@ class Contact extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function scopeLatestFirst($query)
+    {
+        return $query->orderBy('id', 'desc');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new FilterScope());
+        static::addGlobalScope(new SearchScope());
     }
 }
 
